@@ -1,0 +1,223 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Optional: Custom smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Add to app/globals.css or in a <style> tag */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateX(100px) translateY(100vh) rotate(360deg);
+  }
+}
+
+/* Apply animation to all particle divs */
+.fixed.inset-0 > .absolute {
+  animation: drift linear infinite;
+}
+
+/* Different animation durations for variety */
+.fixed.inset-0 > .absolute:nth-child(odd) {
+  animation-duration: 20s;
+}
+
+.fixed.inset-0 > .absolute:nth-child(even) {
+  animation-duration: 25s;
+}
+
+/* Add floating animation to the large blur circles */
+.fixed.inset-0 > .absolute.w-96 {
+  animation: float 10s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px); /* Float upward */
+  }
+  100% {
+    transform: translateY(0); /* Return to initial position */
+  }
+}
+
+/* Apply animation to the class */
+.animate-float {
+  animation-name: float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite; /* Makes it loop forever */
+  animation-delay: 0s;
+  animation-duration: 6s;
+}
+
+
+/* Gradient background for the section */
+.section {
+  position: relative;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+}
+
+.section .gradient-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.2), rgba(30, 58, 138, 0.2), rgba(162, 28, 175, 0.2));
+}
+
+.section .container {
+  position: relative;
+  z-index: 10;
+}
+
+.section .container h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.section .container p {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 3rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.section .cta-button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(to right, #06b6d4, #8b5cf6);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+}
+
+.section .cta-button:hover {
+  background: linear-gradient(to right, #06b6d4, #9333ea);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.section .cta-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* Dynamic circles */
+.section .circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3xl);
+  background-color: rgba(6, 182, 212, 0.1);
+}
+
+.section .circle1 {
+  top: 25%;
+  left: 25%;
+  width: 24rem;
+  height: 24rem;
+  transform: scale(1.18);
+}
+
+.section .circle2 {
+  bottom: 25%;
+  right: 25%;
+  width: 24rem;
+  height: 24rem;
+  background-color: rgba(128, 90, 164, 0.1);
+  transform: scale(1.16);
+}
+
+.section .circle3 {
+  top: 50%;
+  left: 50%;
+  width: 37.5rem;
+  height: 37.5rem;
+  background: linear-gradient(to right, rgba(6, 182, 212, 0.05), rgba(128, 90, 164, 0.05), rgba(244, 114, 182, 0.05));
+  transform: rotate(255.204deg) translateX(-50%) translateY(-50%);
+}
+
+@keyframes counter {
+  0%   { left:0px; top:-10px; opacity: 0;}
+  100% { left:0px; top:0px;}
+}
+
+/* Sparkle animation for button hover effect */
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg) scale(0);
+  }
+  15% {
+    opacity: 1;
+    transform: rotate(90deg) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: rotate(630deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(720deg) scale(0);
+  }
+}
+
+.sparkle-star {
+  animation: sparkle ease-in-out infinite;
+  transform-origin: center center;
+}
